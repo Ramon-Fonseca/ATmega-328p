@@ -1,0 +1,32 @@
+/*
+ * pisca led.c
+ *
+ * Created: 02/05/2022 18:07:25
+ * Author : Ramon
+ */ 
+
+#include <avr/io.h>
+#define F_CPU 16000000UL
+#include <avr/io.h>
+#include <util/delay.h>
+#define set_bit(Y,bit_x) (Y|=(1<<bit_x))
+#define clr_bit(Y,bit_x) (Y&=~(1<<bit_x))
+#define tst_bit(Y,bit_x) (Y&(1<<bit_x))
+#define cpl_bit(Y,bit_x) (Y^=(1<<bit_x))
+#define LED PB1	
+
+
+
+int main()
+{
+	DDRB = 0XFF;
+    /* Replace with your application code */
+    while (1) 
+    {
+		set_bit(PORTB,LED);
+		_delay_ms(200);
+		clr_bit(PORTB,LED);
+		_delay_ms(200);
+    }
+}
+
