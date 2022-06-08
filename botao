@@ -1,0 +1,33 @@
+#define F_CPU 16000000UL
+#include <avr/io.h>
+#include <util/delay.h>
+#define  set_bit(Y,bit_x)(Y|=(1<<bit_x))
+#define clr_bit(Y,bit_x)(Y&=~(1<<bit_x)
+#define cpl_bit(Y,bit_x)(Y^=(1<<bit_x))
+#define tst_bit(Y,bit_x)(Y&(1<<bit_x))
+#define LED PD2
+#define BOTAO PD7
+//----------------------------------------------
+
+int main()
+{
+	DDRD = 0b00000100;
+	PORTD= 0b11111111;
+    /* Replace with your application code */
+    while (1) 
+    {
+		if (!tst_bit(PIND,BOTAO))
+		{
+			while(!tst_bit(PIND,BOTAO))
+			_delay_ms(10);
+			if (tst_bit(PORTD,LED))
+			
+				clr_bit(PORTD,LED));
+			
+		} 
+		else
+		{
+			set_bit(PORTD,LED);
+		}
+    }
+}
