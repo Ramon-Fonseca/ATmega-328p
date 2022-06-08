@@ -1,0 +1,49 @@
+#define  F_CPU 16000000UL
+#include <avr/io.h>
+#include <util/delay.h>
+#define set_bit(Y,bit_x)(Y|=(1<<bit_x))
+#define clr_bit(Y,bit_x)(Y&=~(1<<bit_x))
+#define cpl_bit(Y,bit_x)(Y^=(1<<bit_x))
+#define tst_bit(Y,bit_x)(Y&=(1<<bit_x))
+#define RELE1 PD2
+#define RELE2 PD3
+#define RELE3 PD4
+#define BOTAO1 PD7
+#define BOTAO2 PD6
+#define BOTAO3 PD5
+
+int main(void)
+{
+	DDRD=0b00011100;
+	PORTD=0b11111111;
+	while (1)
+	{
+		if(!tst_bit(PIND,BOTAO1))
+		{
+			while(!tst_bit(PIND,BOTAO1));
+			_delay_ms(10);
+			if(tst_bit(PORTD,RELE1))
+			clr_bit(PORTD,RELE1);
+			else
+			set_bit(PORTD,RELE1);
+		}
+		if(!tst_bit(PIND,BOTAO2))
+		{
+			while(!tst_bit(PIND,BOTAO2));
+			_delay_ms(10);
+			if(tst_bit(PORTD,RELE2))
+			clr_bit(PORTD,RELE2);
+			else
+			set_bit(PORTD,RELE2);
+		}
+		if(!tst_bit(PIND,BOTAO3))
+		{
+			while(!tst_bit(PIND,BOTAO3));
+			_delay_ms(10);
+			if(tst_bit(PORTD,RELE3))
+			clr_bit(PORTD,RELE3);
+			else
+			set_bit(PORTD,RELE3);
+		}
+	}
+}
